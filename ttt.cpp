@@ -43,7 +43,6 @@ int checkWinner(int board[9]){
 
 int main(int argc, char* argv[])
 {
-    cout << argc << endl; 
     if(argc != 2)
     {
         cerr << "Usage: " << argv[0] << " <name>" << endl;
@@ -86,6 +85,7 @@ int main(int argc, char* argv[])
         cout << "Player move: ";
         int move;
         scanf("%d", &move);
+        cout << move << endl;
         if (move < 1 || move > 9 || board[move - 1] != 0) {
             cerr << "Invalid move!" << endl;
             return 1;

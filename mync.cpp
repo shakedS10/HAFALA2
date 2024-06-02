@@ -272,8 +272,22 @@ int main(int argc, char* argv[]) {
         cerr << "Error: Failed to fork" << endl;
         return 1;
     }
-    for (;running && waitpid(pid, nullptr, 0); sleep(1));
-    if (!running) kill(pid, SIGTERM);
+    int status;
+    while (running && waitpid(pid, &status, WNOHANG) == 0) {
+        sleep(1);
+    }
+
+    if (WIFEXITED(status)) {
+        WEXITSTATUS(status);
+    }
+    
+
+    if (!running) {
+        if (kill(pid, SIGTERM) == -1) {
+            cerr << "Error: Failed to terminate child process" << endl;
+        }
+    }
+    
 
     return 0;
 }

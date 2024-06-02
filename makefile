@@ -15,4 +15,4 @@ fsdgds: fsdgds.cpp
 
 
 clean:
-	rm -f mync ttt fsdgds
+	rm -f *.gcda *.gcno *.gcov mync ttt fsdgds
